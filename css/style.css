@@ -1,0 +1,15 @@
+.faker-table{
+    border-collapse: collapse;
+}
+.faker-table th{
+    padding: 10px;
+    text-align: start;
+}
+.faker-table td{
+    padding: 10px 30px 10px 10px;
+    border-bottom: 1px dashed #000;
+}
+.faker-table .yellow{
+    color: #ffb300;
+    font-weight: 600;
+}
