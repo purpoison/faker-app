@@ -133,9 +133,6 @@
         try{
             $sth = $dbh->query($sql);
             $result = $sth->fetchAll(PDO::FETCH_OBJ);
-            // echo "<pre>";
-            // var_dump($result);
-
         }catch (PDOException $e) {
             die("Error! Code: {$e->getCode()}. Message: {$e->getMessage()}".PHP_EOL);
             exit;
@@ -174,4 +171,36 @@
             </tbody>
                     </table>";
         }
+    }
+
+    function searching($dbh, $author_name){
+        try {
+
+            // SELECT authors.id, authors.name, COUNT(DISTINCT articles.id) AS posts, COUNT(DISTINCT comments.id) AS messages FROM authors LEFT JOIN articles ON authors.id = articles.author_id LEFT JOIN comments ON articles.id = comments.article_id WHERE name LIKE :name GROUP BY authors.id ORDER BY posts DESC;
+            // SELECT * FROM authors WHERE name LIKE :name
+
+            $sql = "SELECT authors.id, authors.name, COUNT(DISTINCT articles.id) AS posts, COUNT(DISTINCT comments.id) AS messages FROM authors LEFT JOIN articles ON authors.id = articles.author_id LEFT JOIN comments ON articles.id = comments.article_id WHERE name LIKE :name GROUP BY authors.id ORDER BY posts DESC";
+            $sth = $dbh->prepare($sql);
+            $sth->bindParam(':name', $author_name);
+            $sth->execute();
+            $result = $sth->fetchAll(PDO::FETCH_OBJ);
+
+        }catch (PDOException $e) {
+            die("Error! Code: {$e->getCode()}. Message: {$e->getMessage()}".PHP_EOL);
+            exit;
+        }
+        return $result;
+    }
+    function resultBuilder($data){
+        $result = '';
+        if(count($data) <= 1){
+            $result =  "{$data[0]->name}; posts: {$data[0]->posts}; comments: {$data[0]->messages}";  
+        }else{
+            $result = "<ul>";
+            foreach($data as $row){
+                $result .= "<li>{$row->name}; posts: {$row->posts}; comments: {$row->messages} </li>"; 
+            }
+            $result .= "</ul>";
+        }
+        return $result;
     }

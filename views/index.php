@@ -8,5 +8,9 @@
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+    <form action="../search.php" method="POST" class="searching-form">
+        <input type="search" name="search" placeholder="Search by author name">
+        <input type="submit" value="Search" name="submit">
+    </form>
 </body>
 </html>

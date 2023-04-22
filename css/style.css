@@ -2,14 +2,30 @@
     border-collapse: collapse;
 }
 .faker-table th{
-    padding: 10px;
+    padding: 0.5rem;
     text-align: start;
 }
 .faker-table td{
-    padding: 10px 30px 10px 10px;
+    padding: 0.5rem 2rem 1rem 0.5rem;
     border-bottom: 1px dashed #000;
 }
 .faker-table .yellow{
     color: #ffb300;
     font-weight: 600;
+}
+.searching-form{
+    margin-top: 20px;
+}
+.searching-form input{
+    padding: 0.5rem 0;
+}
+.searching-form input[type ='search']{
+    width: 22em;
+    padding-left: 5px;
+}
+.searching-form input[type ='submit']{
+    width: 8em;
+    cursor: pointer;
+    background-color: #eec70e5e;
+    border: 1px solid grey;
 }
